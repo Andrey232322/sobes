@@ -64,4 +64,3 @@
 #     "zapic`\\№1.json",
 #     "zapic`\\№2.json"
 #   ]
-# print(list(zip(a,b)))
