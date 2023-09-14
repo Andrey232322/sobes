@@ -21,8 +21,9 @@ def upload(file: UploadFile = File(...)):
     """запись и хранение файлов и данных на локалке, позже реализовать 
     нэйм какой на входе прилетает и проверять есть он или нет"""
 
-    with open(os.path.join(zap, f'№{a}'), 'w') as s:
-        s.write(str(list(csvReader)))
+    with open(os.path.join(zap, f'{a}'), 'w') as s:
+        for i in list(csvReader):
+            json.dump(i,s)
 
         return True
 
@@ -31,3 +32,10 @@ def upload(file: UploadFile = File(...)):
     print('dwa')
     return data
 
+@app.get('/show')
+def show():
+    file = os.listdir(zap)
+    b = {}
+    for i in file:
+        with open(i, 'r', encoding='utf-8') as r:
+            b[i] = json.load(r)
