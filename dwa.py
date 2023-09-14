@@ -1,3 +1,4 @@
+import codecs
 import csv
 import glob
 import json
@@ -7,33 +8,24 @@ import pandas
 zap = 'zapic`'
 file = os.listdir(zap)
 a = pandas.read_csv('12.csv').columns.tolist()
+b = []
 with open('12.csv', 'r') as s:
     csvReader = csv.DictReader(s)
     with open(os.path.join(zap, '12.csv'), 'w') as w:
-        write = csv.DictWriter(w, fieldnames=a)
-        #write.writerow(a)
+        wr = csv.DictWriter(w,fieldnames=a)
         for i in csvReader:
-            write.writerow(i)
+            b.append(i)
+            #print(wr.writerow(i))
 
-
-
-
-
-
-
-
-
+print(b)
+for i in b:
+    print(type(i))
+# file = os.listdir(zap)
 # b = []
-# a = pandas.read_csv('zapic`\\12.csv').columns.tolist()
-# for i in a:
-#     b.append(i)
 # for i in file:
-#     with open(i, 'r', encoding='utf-8') as r:
-#         for i in r:
-#             b.append(i)
-
-
-
+#     with open(i, 'r') as r:
+#         b.append(r.read())
+# print(b)
 
 
 

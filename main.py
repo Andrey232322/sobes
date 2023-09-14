@@ -20,11 +20,15 @@ def upload(file: UploadFile = File(...)):
 
     """запись и хранение файлов и данных на локалке, позже реализовать 
     нэйм какой на входе прилетает и проверять есть он или нет"""
-
-    with open(os.path.join(zap, f'{a}'), 'w') as s:
-        for i in list(csvReader):
-            json.dump(i,s)
-
+    b = []
+    with open(os.path.join(zap, f'{a}'), 'r') as s:
+        csvReader = csv.DictReader(s)
+        with open(os.path.join(zap, '12.csv'), 'r') as w:
+            wr = csv.DictWriter(w, fieldnames=a)
+            for i in csvReader:
+                b.append(i)
+        for i in b:
+            wr.writerow(i)
         return True
 
     colum = pandas.read_csv(a).columns.tolist()
@@ -35,7 +39,8 @@ def upload(file: UploadFile = File(...)):
 @app.get('/show')
 def show():
     file = os.listdir(zap)
-    b = {}
+    b = []
     for i in file:
         with open(i, 'r', encoding='utf-8') as r:
-            b[i] = json.load(r)
+            b.append(r.read())
+    return b
